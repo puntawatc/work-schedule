@@ -163,6 +163,8 @@ header h1 em{font-style:italic;color:#c9aa8c;}
 .modal-field .mf-value{font-size:.86rem;line-height:1.5;word-break:break-word;}
 .modal-field .mf-value a{color:var(--blue);}
 .modal-actions{display:flex;justify-content:flex-end;gap:.5rem;margin-top:1.25rem;}
+.edit-btn{background:none;border:1.5px solid var(--border);color:var(--muted);font-size:.8rem;width:28px;height:28px;border-radius:6px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:border-color .15s,color .15s;}
+.edit-btn:hover{border-color:var(--blue);color:var(--blue);}
 </style>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
@@ -296,17 +298,19 @@ function orgChipHTML(m){
   return `<span class="org-chip" style="background:${c.bg};color:${c.fg}"><span class="chip-dot" style="background:${c.dot}"></span>${escHtml(o)}</span>`;
 }
 
-function finItemHTML(m){
+function finItemHTML(m,editable){
   const s=statusOf(m);
-  return `<div class="fin-item" style="border-left-color:${statusColorVar(s)}" onclick="openMeeting(${meetingIndex(m)})">
+  const idx=meetingIndex(m);
+  return `<div class="fin-item" style="border-left-color:${statusColorVar(s)}" onclick="openMeeting(${idx})">
     <span class="status-dot" style="background:${statusColorVar(s)}"></span>
     <span class="nm">${escHtml(m.subject)}<span class="org-row">${orgChipHTML(m)}</span></span>
     <span class="dt">${m.time?escHtml(m.time):""}</span>
     <span class="badge ${s}">${statusLabel(s)}</span>
+    ${editable?`<button class="edit-btn" onclick="event.stopPropagation();openEditMeeting(${idx})" title="แก้ไข">&#9998;</button>`:''}
   </div>`;
 }
 
-function dayGroupHTML(list){
+function dayGroupHTML(list,editable){
   if(!list.length) return `<div class="empty"><span>&#128197;</span>ไม่มีรายการ</div>`;
   const groups=groupByDay(list);
   return `<div class="fin-list">` + groups.map(g=>`
@@ -315,7 +319,7 @@ function dayGroupHTML(list){
         <span class="day-group-date">${escHtml(g.label)}</span>
         <span class="day-group-sum">${g.items.length} รายการ</span>
       </div>
-      <div class="fin-list">${g.items.map(finItemHTML).join("")}</div>
+      <div class="fin-list">${g.items.map(m=>finItemHTML(m,editable)).join("")}</div>
     </div>`).join("") + `</div>`;
 }
 
@@ -487,7 +491,7 @@ function renderList(){
       <button class="pill ${listStatus==='upcoming'?'active':''}" onclick="setListStatus('upcoming')">กำลังจะถึง</button>
       <button class="pill ${listStatus==='cancel'?'active':''}" onclick="setListStatus('cancel')">ยกเลิก</button>
     </div>
-    ${dayGroupHTML(filtered)}
+    ${dayGroupHTML(filtered,true)}
   `;
   if(_pendingSuccess){_pendingSuccess=false;const ok=document.getElementById("add-success");if(ok){ok.classList.add("show");setTimeout(()=>ok.classList.remove("show"),2000);}}
   document.getElementById("list-search").addEventListener("input",function(){
@@ -537,6 +541,70 @@ window.clearAddForm=function(){
     const el=document.getElementById(id);if(el)el.value="";
   });
   const sel=document.getElementById("add-status");if(sel)sel.value="upcoming";
+};
+
+window.openEditMeeting=function(idx){
+  const m=MEETINGS[idx];
+  if(!m) return;
+  const s=statusOf(m);
+  const orgs=allOrgsUnique();
+  document.getElementById("meet-modal-body").innerHTML=`
+    <h3 style="margin-bottom:1.25rem">แก้ไขรายการ</h3>
+    <div class="add-fields">
+      <div class="add-field wide"><label>เรื่อง</label><input type="text" id="edit-subject" value="${escHtml(m.subject||'')}"/></div>
+      <div class="add-field"><label>วันที่</label><input type="date" id="edit-date" value="${escHtml(m.date||'')}"/></div>
+      <div class="add-field"><label>เวลา</label><input type="text" id="edit-time" value="${escHtml(m.time||'')}"/></div>
+    </div>
+    <div class="add-fields">
+      <div class="add-field wide">
+        <label>หน่วยงาน</label>
+        <input type="text" id="edit-org" list="edit-org-list" value="${escHtml(m.org||'')}"/>
+        <datalist id="edit-org-list">${orgs.map(o=>`<option value="${escHtml(o)}">`).join('')}</datalist>
+      </div>
+      <div class="add-field"><label>สถานะ</label>
+        <select id="edit-status">
+          <option value="upcoming"${s==='upcoming'?' selected':''}>กำลังจะถึง</option>
+          <option value="done"${s==='done'?' selected':''}>เสร็จสิ้น</option>
+          <option value="cancel"${s==='cancel'?' selected':''}>ยกเลิก</option>
+        </select>
+      </div>
+      <div class="add-field"><label>ผู้ร่วมกิจกรรม</label><input type="text" id="edit-attendees" value="${escHtml(m.attendees||'')}"/></div>
+    </div>
+    <div class="add-fields">
+      <div class="add-field wide"><label>หมายเหตุ / ลิงก์</label><input type="text" id="edit-notes" value="${escHtml(m.notes||'')}"/></div>
+      <div class="add-field"><label>เลขที่หนังสือ</label><input type="text" id="edit-docno" value="${escHtml(m.docno||'')}"/></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal()">ยกเลิก</button>
+      <button class="btn btn-primary" onclick="saveEditMeeting(${idx})">บันทึก</button>
+    </div>
+  `;
+  document.getElementById("meet-modal").classList.remove("hidden");
+};
+
+window.saveEditMeeting=function(idx){
+  const m=MEETINGS[idx];
+  if(!m||!m._id) return;
+  const subject=(document.getElementById("edit-subject").value||"").trim();
+  if(!subject){document.getElementById("edit-subject").focus();return;}
+  const dateVal=document.getElementById("edit-date").value;
+  const timeVal=(document.getElementById("edit-time").value||"").trim();
+  const org=(document.getElementById("edit-org").value||"").trim()||null;
+  const statusVal=document.getElementById("edit-status").value;
+  const attendees=(document.getElementById("edit-attendees").value||"").trim()||null;
+  const notes=(document.getElementById("edit-notes").value||"").trim()||null;
+  const docno=(document.getElementById("edit-docno").value||"").trim()||null;
+  let iso=m.date,dateLabel=m.dateLabel,month=m.month;
+  if(dateVal){
+    iso=dateVal;
+    const [y,mo,d]=dateVal.split("-").map(Number);
+    const ABBR=["","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."];
+    dateLabel=`${d} ${ABBR[mo]} ${String(y+543).slice(2)}`;
+    month=`${y}-${String(mo).padStart(2,"0")}`;
+  }
+  const updated={date:iso,dateLabel,month,time:timeVal||null,done:statusVal==="done",cancelled:statusVal==="cancel",subject,org,docno,attendees,notes};
+  closeModal();
+  db.collection("meetings").doc(m._id).update(updated).catch(e=>alert("แก้ไขไม่สำเร็จ: "+e.message));
 };
 
 /* ── DEPT TAB ── */
