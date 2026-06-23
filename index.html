@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>กำหนดการประชุม</title>
+<title>กำหนดการประชุม 2569</title>
 <script>
 (function(){
   var mode=localStorage.getItem("themeModeMeetings")||"auto";
@@ -65,6 +65,7 @@ header h1 em{font-style:italic;color:#c9aa8c;}
 .panel.active{display:block;}
 .section-label{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;}
 
+/* ── summary cards ── */
 .summary-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-bottom:1.5rem;}
 .sum-card{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:1.2rem 1.4rem;border-left-width:4px;}
 .sum-card .label{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.06em;color:var(--muted);margin-bottom:.5rem;}
@@ -74,42 +75,70 @@ header h1 em{font-style:italic;color:#c9aa8c;}
 .sum-card.upcoming{border-left-color:var(--gold);}.sum-card.upcoming .value{color:var(--gold);}
 .sum-card.cancel{border-left-color:var(--accent);}.sum-card.cancel .value{color:var(--accent);}
 
+/* ── chart card ── */
 .chart-card{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;padding:1.4rem 1.5rem;margin-bottom:1.5rem;}
-
 .balance-track{height:14px;background:var(--warm-mid);border-radius:10px;overflow:hidden;display:flex;margin:.75rem 0 .75rem;}
 .balance-track > div{height:100%;transition:width .5s;}
 .balance-legend{display:flex;gap:1.25rem;flex-wrap:wrap;font-family:'DM Mono',monospace;font-size:.68rem;color:var(--muted);}
 .balance-legend i{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:5px;vertical-align:middle;}
 
-.cat-bar-row{display:flex;align-items:center;gap:.75rem;margin-bottom:.7rem;cursor:pointer;}
-.cat-bar-label{font-size:.82rem;width:130px;flex-shrink:0;}
+/* ── org bars ── */
+.cat-bar-row{display:flex;align-items:center;gap:.75rem;margin-bottom:.8rem;cursor:pointer;}
+.cat-bar-swatch{width:10px;height:10px;border-radius:3px;flex-shrink:0;}
+.cat-bar-label{font-size:.82rem;min-width:120px;flex-shrink:0;}
 .cat-bar-track{flex:1;height:9px;background:var(--warm-mid);border-radius:10px;overflow:hidden;}
 .cat-bar-fill{height:100%;border-radius:10px;transition:width .5s ease;}
 .cat-bar-amt{font-family:'Fraunces',serif;font-size:.85rem;width:70px;text-align:right;color:var(--muted);}
 
+/* ── list items ── */
 .fin-list{display:flex;flex-direction:column;gap:.5rem;}
 .fin-item{display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem;background:var(--surface);border-radius:8px;border:1.5px solid var(--border);border-left-width:4px;cursor:pointer;transition:transform .1s;}
 .fin-item:hover{transform:translateX(2px);}
-.fin-item .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.fin-item .status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
 .fin-item .nm{flex:1;font-size:.86rem;min-width:0;}
-.fin-item .nm .org-tag{display:block;font-family:'DM Mono',monospace;font-size:.64rem;color:var(--muted);margin-top:.15rem;}
+.fin-item .nm .org-row{display:flex;align-items:center;gap:.35rem;margin-top:.2rem;}
+.fin-item .nm .org-chip{display:inline-flex;align-items:center;gap:.28rem;font-family:'DM Mono',monospace;font-size:.62rem;padding:.1rem .45rem;border-radius:10px;font-weight:500;}
+.fin-item .nm .org-chip .chip-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
 .fin-item .dt{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--muted);white-space:nowrap;}
 .fin-item .badge{font-size:.64rem;padding:.18rem .55rem;border-radius:20px;white-space:nowrap;flex-shrink:0;}
 .badge.done{background:var(--green-soft);color:var(--green);}
 .badge.upcoming{background:var(--gold-soft);color:var(--gold);}
 .badge.cancel{background:var(--accent-soft);color:var(--accent);}
 
+/* ── day groups ── */
 .day-group{margin-bottom:1.25rem;}
 .day-group-header{display:flex;justify-content:space-between;align-items:center;padding:.3rem .2rem .5rem;border-bottom:1.5px solid var(--border);margin-bottom:.5rem;}
 .day-group-date{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--ink);font-weight:500;}
 .day-group-sum{font-family:'Fraunces',serif;font-size:.85rem;font-weight:600;color:var(--muted);}
 
+/* ── filter row ── */
 .filter-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.25rem;align-items:center;}
 .filter-row input[type=text]{flex:1;min-width:160px;border:1.5px solid var(--border);border-radius:20px;padding:.5rem 1rem;font-family:'Noto Sans Thai',sans-serif;font-size:.82rem;background:var(--surface);color:var(--ink);outline:none;}
 .filter-row input[type=text]:focus{border-color:var(--accent);}
 .pill{font-family:'Noto Sans Thai',sans-serif;font-size:.74rem;font-weight:500;padding:.4rem .9rem;border-radius:20px;border:1.5px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;white-space:nowrap;transition:all .15s;}
 .pill.active{border-color:var(--accent);color:var(--accent);background:var(--accent-soft);}
 
+/* ── ADD FORM (inline, matches finance app style) ── */
+.add-form-section{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;padding:1.5rem 1.5rem 1.25rem;margin-bottom:1.75rem;}
+.add-form-section hr{border:none;border-top:1.5px solid var(--border);margin:0 0 1.25rem;}
+.add-fields{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.25rem;align-items:flex-end;}
+.add-field{display:flex;flex-direction:column;gap:.4rem;flex:1;min-width:140px;}
+.add-field.wide{flex:2;min-width:220px;}
+.add-field label{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+.add-field input,.add-field select{border:1.5px solid var(--border);border-radius:6px;padding:.55rem .75rem;font-family:'Noto Sans Thai',sans-serif;font-size:.86rem;background:var(--paper);color:var(--ink);outline:none;width:100%;transition:border-color .15s;}
+.add-field input:focus,.add-field select:focus{border-color:var(--accent);}
+.add-field input::placeholder{color:var(--muted);}
+.add-actions{display:flex;gap:.75rem;}
+.btn{padding:.6rem 1.4rem;border-radius:6px;border:none;cursor:pointer;font-family:'Noto Sans Thai',sans-serif;font-size:.84rem;font-weight:600;letter-spacing:.01em;transition:transform .1s,opacity .1s;}
+.btn:active{transform:scale(.97);}
+.btn-primary{background:var(--accent);color:#fff;}
+.btn-primary:hover{opacity:.9;}
+.btn-ghost{background:var(--warm-mid);color:var(--ink);}
+.btn-ghost:hover{background:var(--border);}
+.add-success{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--green);margin-left:.5rem;opacity:0;transition:opacity .3s;}
+.add-success.show{opacity:1;}
+
+/* ── trend chart ── */
 .annual-chart{display:flex;align-items:flex-end;gap:1.2rem;height:160px;margin-bottom:.5rem;padding:0 1rem;}
 .annual-col{flex:1;display:flex;flex-direction:column;align-items:center;height:100%;justify-content:flex-end;gap:2px;cursor:pointer;max-width:90px;}
 .annual-bars{display:flex;gap:3px;align-items:flex-end;height:100%;width:100%;justify-content:center;}
@@ -123,26 +152,26 @@ header h1 em{font-style:italic;color:#c9aa8c;}
 .empty span{display:block;font-size:2rem;margin-bottom:.5rem;}
 .divider{border:none;border-top:1.5px solid var(--border);margin:1.5rem 0;}
 
+/* ── detail modal ── */
 .modal-overlay{position:fixed;inset:0;background:rgba(26,26,46,.55);backdrop-filter:blur(3px);z-index:100;display:flex;align-items:center;justify-content:center;padding:1rem;}
 .modal-overlay.hidden{display:none;}
 .modal{background:var(--paper);border-radius:14px;padding:1.75rem;width:100%;max-width:480px;max-height:85vh;overflow-y:auto;box-shadow:0 8px 32px rgba(0,0,0,.18);}
 .modal h3{font-family:'Fraunces',serif;font-weight:300;font-size:1.25rem;margin-bottom:.4rem;line-height:1.4;}
-.modal .m-badge-row{margin-bottom:1.1rem;}
+.modal .m-badge-row{margin-bottom:1.1rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;}
 .modal-field{margin-bottom:.9rem;}
 .modal-field .mf-label{font-family:'DM Mono',monospace;font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:.2rem;}
 .modal-field .mf-value{font-size:.86rem;line-height:1.5;word-break:break-word;}
 .modal-field .mf-value a{color:var(--blue);}
-.modal-actions{display:flex;justify-content:flex-end;margin-top:1.25rem;}
-.btn{padding:.55rem 1.2rem;border-radius:6px;border:none;cursor:pointer;font-family:'Noto Sans Thai',sans-serif;font-size:.8rem;font-weight:500;transition:transform .1s;}
-.btn:active{transform:scale(.97);}
-.btn-ghost{background:var(--warm-mid);color:var(--ink);}
+.modal-actions{display:flex;justify-content:flex-end;gap:.5rem;margin-top:1.25rem;}
 </style>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 </head>
 <body>
 
 <div id="info-bar">
   <span id="info-dot"></span>
-  <span>ข้อมูลจาก กำหนดการประชุม 2569.xlsx &middot; 43 รายการ</span>
+  <span>กำหนดการประชุม 2569 &middot; <span id="info-count">43</span> รายการ</span>
 </div>
 
 <div class="modal-overlay hidden" id="meet-modal">
@@ -175,10 +204,28 @@ header h1 em{font-style:italic;color:#c9aa8c;}
 
 <script>
 
-const MEETINGS = [{"date": "2026-05-05", "dateLabel": "5 พ.ค. 69", "month": "2026-05", "time": "09.30 - 12.00", "done": true, "cancelled": false, "subject": "ประชุมจัดทำ Safety Assessment การหยุดให้บริการ DVOR ลำปาง เพชรบูรณ์", "org": "อว.สว. / วช.บว.", "docno": "อว.สว266/2569", "docdate": "5 พ.ค. 69", "attendees": "การัณย์, ทศพล, ภาณุ ปิยะพงษ์, สุจินดา", "notes": "Microsoft Teams โดยมี Meeting ID: 485 590 230 117 64 11และ Passcode: on6Ri7Wb"}, {"date": "2026-05-06", "dateLabel": "6 พ.ค. 69", "month": "2026-05", "time": "09.00 - 16.00", "done": true, "cancelled": false, "subject": "อบรมเชิงปฏิบัติการ (Workshop) คณะทํางานจัดการระบบ คุณภาพด้านการบริการจราจรทางอากาศ (QMR – ATS)", "org": "พค.นบ.", "docno": "Helpme/960/2569", "docdate": "5 พ.ค. 69", "attendees": "พอพันธ์/คุณกฤษฎา/คุณสาวิตรี", "notes": "Microsoft Teams โดยมี Meeting ID: 485 590 230 117 64 11และ Passcode: on6Ri7Wb"}, {"date": "2026-05-07", "dateLabel": "7 พ.ค. 69", "month": "2026-05", "time": "08.30 - 16.30", "done": true, "cancelled": false, "subject": "อบรมการปฏิบัติงานบนที่สูง สำหรับผู้ปฏิบัติงาน", "org": "วช.บว.", "docno": "วช.บว228/2569", "docdate": "5 มี.ค. 69", "attendees": "วิศวกร ศล.บภ ๒. จำนวน 22 คน", "notes": "ห้องประชุม 2/1"}, {"date": "2026-05-08", "dateLabel": "8 พ.ค. 69", "month": "2026-05", "time": "09.00 - 16.00", "done": true, "cancelled": false, "subject": "อบรมเชิงปฏิบัติการ (Workshop) คณะทํางานจัดการระบบ คุณภาพด้านการบริการจราจรทางอากาศ (QMR – ภูมภาค)", "org": "พค.นบ.", "docno": "พค.นบ137/2569", "docdate": "30 เม.ย. 69", "attendees": "พอพันธ์/คุณกฤษฎา/คุณสาวิตรี", "notes": "https://teams.microsoft.com/meet/47057883543195?p=mjfaPBYZgrv4GXQxkU"}, {"date": "2026-05-11", "dateLabel": "11-12 พ.ค. 69", "month": "2026-05", "time": null, "done": true, "cancelled": false, "subject": "เรียนหลักสูตร  System Training course  Digital Voice Recorder (voxtronix) ในระบบ LMS", "org": "สว.บว.", "docno": "ศล.บภ2-1130/2569", "docdate": "23 พ.ค. 69", "attendees": "พอพันธ์ / ศล.บภ ๒. (วส.บว.)", "notes": "LMS"}, {"date": "2026-05-11", "dateLabel": "11 พ.ค. 69", "month": "2026-05", "time": "09.00 - 12.00", "done": true, "cancelled": false, "subject": "ประชุมการแจ้งเปลี่ยนแปลง โครงการวิทยุ ศล.บภ ๒.", "org": "วส.บว.", "docno": "Line", "docdate": "10 พ.ค. 69", "attendees": "พอพันธ์ / ศล.บภ ๒. (วส.บว.)", "notes": "https://teams.microsoft.com/meet/48902673366826?p=HUmzbCTOIAnBm96tZC"}, {"date": "2026-05-11", "dateLabel": "11 พ.ค. 69", "month": "2026-05", "time": "13.00 - 16.00", "done": true, "cancelled": false, "subject": "ประชุมจัดทำ Safety Assessment ของระบบงาน SMC รอบที่ 1", "org": "สนง.ผญว.", "docno": "สนง.ผญว226/2569", "docdate": "5 พ.ค. 69", "attendees": "การัณย์, ทศพล, ภาณุ ปิยะพงษ์, สุจินดา", "notes": "ZOOM Meeting ID: 474 437 3095 Passcode 998877"}, {"date": "2026-05-12", "dateLabel": "12 พ.ค. 69", "month": "2026-05", "time": "09.00 - 12.00", "done": true, "cancelled": false, "subject": "ประชุมเตรียมความพร้อม ฝึกซ้อม BCP 2569 (4/2569)", "org": "ศล.บภ ๒.", "docno": "ศล.บภ 2-1260/2569", "docdate": "7 พ.ค. 69", "attendees": "คณะทำงานและผู้เกี่ยวข้อง", "notes": "Microsoft Teams  ID : 418 329043 651 02 Passcode : Ad74XQ3D"}, {"date": "2026-05-12", "dateLabel": "12 พ.ค. 69", "month": "2026-05", "time": "13.30 - 16.30", "done": true, "cancelled": false, "subject": "ประชุมเรื่องถอด STS SSR", "org": "วต.บว. / วฟ.สว.", "docno": "Line", "docdate": "12 พ.ค. 69", "attendees": "พอพันธ์ / ภาณุ / วต.", "notes": "Microsoft Teams  ID : 473 943175 138 78 Passcode : V38Sj6P3"}, {"date": "2026-05-12", "dateLabel": "12 พ.ค. 69", "month": "2026-05", "time": "14.00 - 16.00", "done": true, "cancelled": false, "subject": "ประชุมหารือการติดตั้ง Solar Cell ณ ศล.บภ2. (โครงการของ วฟ.สว.)", "org": "วฟ.สว.", "docno": "Line", "docdate": "12 พ.ค. 69", "attendees": "คมสัน / พอพันธ์ / ภาณุ", "notes": "https://teams.microsoft.com/meet/44142351765059?p=0U82zWGlMvhoHT8k4Y"}, {"date": "2026-05-13", "dateLabel": "13 พ.ค. 69", "month": "2026-05", "time": "13.30 - 16.00", "done": true, "cancelled": false, "subject": "ประชุมพิจารณาแผนฝึกซ้อมเหตุฉุกเฉินอากาศยานเต็มรูปแบบประจำปี2569 ครั้งที่ 1", "org": "สนามบินสุโขทัย", "docno": "Helpme/1027/2569", "docdate": "11 พ.ค. 69", "attendees": null, "notes": "https://teams.microsoft.com/meet/41975574737213?p=aQqIQHQHlh3MxHQa68 | รหัสการประชุม: 419 755 747 372 13 | รหัสผ่าน : mj24fF9w"}, {"date": "2026-05-14", "dateLabel": "14 พ.ค. 69", "month": "2026-05", "time": "13.30 - 15.30", "done": true, "cancelled": false, "subject": "ประชุม เรื่องคุณสมบัติของระบบ Solar Rooftop", "org": "วฟ.สว.", "docno": "วฟ.สว616/2569", "docdate": "8 พ.ค. 69", "attendees": "พอพันธ์ / ภาณุ", "notes": "Teams Meeting ID: 418 574 932 149 70 Passcode: E69VA7Mn"}, {"date": "2026-05-14", "dateLabel": "14 พ.ค. 69", "month": "2026-05", "time": "13.30 - 16.00", "done": true, "cancelled": false, "subject": "ประชุมติดตามการแก้ไข NCF", "org": "สนง.ผญว.", "docno": "Line", "docdate": "11 พ.ค. 69", "attendees": "คณะ NC POC", "notes": "https://teams.microsoft.com/meet/49721062994549?p=UTVbrlUBmPlfg8OHA0"}, {"date": "2026-05-18", "dateLabel": "18 พ.ค. 69", "month": "2026-05", "time": "09.30 - 11.00", "done": true, "cancelled": false, "subject": "ประชุม Unit Standard Safety Response ศล.บภ 2. ครั้งที่ 10/2560", "org": "ศล.บภ ๒.", "docno": "Line Unit SR", "docdate": "16 พ.ค. 69", "attendees": "คณะทำงาน Unit SR", "notes": "https://us06web.zoom.us/j/9443609356?pwd=RGJTQU14QWxyUHJPWTUxcHdZYW5Pdz09&omn=84236828113"}, {"date": "2026-05-18", "dateLabel": "18 พ.ค. 69", "month": "2026-05", "time": "13.00 - 16.00", "done": true, "cancelled": false, "subject": "ประชุมจัดทำ Safety Assessment ของระบบงาน SMC รอบที่ 2", "org": "สนง.ผญว.", "docno": "สนง.ผญว226/2569", "docdate": "5 พ.ค. 69", "attendees": "การัณย์, ทศพล, ภาณุ ปิยะพงษ์, สุจินดา", "notes": "ZOOM Meeting ID: 474 437 3095 Passcode 998877"}, {"date": "2026-05-19", "dateLabel": "19 พ.ค. 69", "month": "2026-05", "time": "09.00 - 12.00", "done": true, "cancelled": false, "subject": "ประชุม Safety Assessment สนามบินแม่สอด โครงการเปลี่ยนแปลงวิทยุ", "org": "วส.บว.", "docno": "Line", "docdate": "16 พ.ค. 69", "attendees": "พอพันธ์ / วส. / ศว. / วฟ. / ATS", "notes": "https://teams.microsoft.com/meet/48891915741228?p=SX5MMOpzLUIunqPdaX"}, {"date": "2026-05-19", "dateLabel": "19 พ.ค. 69", "month": "2026-05", "time": "13.00 - 16.00", "done": true, "cancelled": false, "subject": "ประชุมยกเลิก NDB พร. พช.", "org": "วช.บว.", "docno": "วช.บว431/2569", "docdate": "15 พ.ค. 69", "attendees": "พอพันธ์ / ศล.บภ ๒. (วช.บว.) / วิศวกรหอ แพร่ เพชรบูรณ์", "notes": "Microsoftteams Meeting ID : 482 870 858 049 17 และ Passcode : i59pp6eV"}, {"date": "2026-05-20", "dateLabel": "20 พ.ค. 69", "month": "2026-05", "time": "09.00 - 16.00", "done": true, "cancelled": false, "subject": "อบรมการใช้งานระบบสารบรรณดิจิทัล", "org": "ลส.บท.", "docno": "ลส.บท122/0569", "docdate": "12 พ.ค. 69", "attendees": null, "notes": "Meeting ID: 568 660 9012     Passcode: 012120"}, {"date": "2026-05-20", "dateLabel": "20 พ.ค. 69", "month": "2026-05", "time": "10.00 - 12.00", "done": true, "cancelled": false, "subject": "ซ้อมแผนรักษาความปลอดภัยหอควบคุมการจราจรทางอากาศน่าน", "org": "ศล.บภ ๒.", "docno": null, "docdate": null, "attendees": null, "notes": "https://us06web.zoom.us/launch/jc/89724293479"}, {"date": "2026-05-20", "dateLabel": "20 พ.ค. 69", "month": "2026-05", "time": "13.00 - 15.00", "done": true, "cancelled": false, "subject": "กิจกรรมสร้างความตระหนักด้านสิ่งแวดล้อม", "org": "พส.บท.", "docno": null, "docdate": null, "attendees": null, "notes": "ศล.บภ ๒."}, {"date": "2026-05-21", "dateLabel": "21 พ.ค. 69", "month": "2026-05", "time": "07.45 - 16.30", "done": true, "cancelled": false, "subject": "เพื่อสนิท", "org": "พส.บท.", "docno": null, "docdate": null, "attendees": null, "notes": "ห้อง 2/1"}, {"date": "2026-05-26", "dateLabel": "26 พ.ค. 69", "month": "2026-05", "time": "09.00 - 12.00", "done": true, "cancelled": false, "subject": "ประชุมทบทวนการดำเนินงานการปฏิบัติงานป้องกัน วส.บว.", "org": "วส.บว.", "docno": "วส.บว263/2569", "docdate": "19 พ.ค. 69", "attendees": "ผศล. / พอพันธ์ / วส.บว.", "notes": "Microsoft Teams - Meeting ID: 482 067 021 82462 Passcode: Ey7iQ63q"}, {"date": "2026-05-27", "dateLabel": "27 พ.ค. 69", "month": "2026-05", "time": "13.30 - 15.30", "done": true, "cancelled": false, "subject": "ประชุม คปอ.", "org": "ศล.บภ ๒.", "docno": null, "docdate": null, "attendees": "คณะกรรมการ คปอ.", "notes": null}, {"date": "2026-05-28", "dateLabel": "28 พ.ค. 69", "month": "2026-05", "time": "09.00 - 12.00", "done": true, "cancelled": false, "subject": "ประชุม MM", "org": null, "docno": null, "docdate": null, "attendees": "ผศล.", "notes": null}, {"date": "2026-05-28", "dateLabel": "28 พ.ค. 69", "month": "2026-05", "time": "13.00 - 15.00", "done": true, "cancelled": false, "subject": "ประชุมนิรภัยการบิน", "org": "ศล.บภ ๒.", "docno": null, "docdate": null, "attendees": "ศล. ทอ. หน่วยงานข้างเคียง", "notes": "ห้อง 2/1"}, {"date": "2026-05-29", "dateLabel": "29 พ.ค. 69", "month": "2026-05", "time": "09.00 - 12.00", "done": true, "cancelled": false, "subject": "ประชุมเตรียมความพร้อม ฝึกซ้อม BCP 2569 (5/2569)", "org": "ศล.บภ ๒.", "docno": null, "docdate": null, "attendees": "คณะทำงานและผู้เกี่ยวข้อง", "notes": null}, {"date": "2026-05-29", "dateLabel": "29 พ.ค. 69", "month": "2026-05", "time": "10.45 - 12.00", "done": true, "cancelled": false, "subject": "คณะกรรมการ IT (พิจารณางบประมาณ)", "org": null, "docno": null, "docdate": null, "attendees": null, "notes": null}, {"date": "2026-06-04", "dateLabel": "4 มิ.ย. 69", "month": "2026-06", "time": "13.30 - 16.30", "done": true, "cancelled": false, "subject": "ประชุม Preventive Action 3/2569", "org": null, "docno": null, "docdate": null, "attendees": "งานวิศวกรรม ศล.บภ ๒.", "notes": null}, {"date": "2026-06-05", "dateLabel": "5 มิ.ย. 69", "month": "2026-06", "time": "09.00 - 11.00", "done": true, "cancelled": false, "subject": "การประชุม Unit Standard Safety Response ศล.บภ 2. ครั้งที่ 11/2560", "org": "ศล.บภ ๒.", "docno": "Line Unit SR", "docdate": "31 พ.ค. 69", "attendees": "คณะทำงาน Unit SR", "notes": null}, {"date": "2026-06-08", "dateLabel": "8 มิ.ย. 69", "month": "2026-06", "time": "09.00 - 12.00", "done": true, "cancelled": false, "subject": "morning coffee", "org": "ศล.บภ ๒.", "docno": null, "docdate": null, "attendees": "หัวหน้างาน", "notes": null}, {"date": "2026-06-09", "dateLabel": "9 มิ.ย. 69", "month": "2026-06", "time": null, "done": true, "cancelled": false, "subject": "ฝึกซ้อมเสมือนจริง BCP 2569 (6/2569)", "org": "ศล.บภ ๒.", "docno": null, "docdate": null, "attendees": "คณะทำงานและผู้เกี่ยวข้อง", "notes": null}, {"date": "2026-06-11", "dateLabel": "11 มิ.ย. 69", "month": "2026-06", "time": null, "done": true, "cancelled": false, "subject": "ฝึกซ้อมจริง BCP 2569 (7/2569)", "org": "ศล.บภ ๒.", "docno": null, "docdate": null, "attendees": "คณะทำงานและผู้เกี่ยวข้อง", "notes": null}, {"date": "2026-06-11", "dateLabel": "11 มิ.ย. 69", "month": "2026-06", "time": "13.00 - 14.30", "done": true, "cancelled": false, "subject": "วิทยากรสอนวิศวกรใหม่", "org": "ศล.บภ ๒.", "docno": null, "docdate": null, "attendees": "วิศวกรใหม่", "notes": "ห้อง 2/2"}, {"date": "2026-06-12", "dateLabel": "12 มิ.ย. 69", "month": "2026-06", "time": "13.00 - 16.00", "done": true, "cancelled": false, "subject": "ประชุมจัดทำ Safety Assessment ย้ายหอแม่สอด", "org": "ศล.บภ ๒.", "docno": null, "docdate": null, "attendees": null, "notes": null}, {"date": "2026-06-17", "dateLabel": "17 มิ.ย. 69", "month": "2026-06", "time": "13.00 - 16.00", "done": false, "cancelled": true, "subject": "ประชุม BAS", "org": null, "docno": null, "docdate": null, "attendees": null, "notes": null}, {"date": "2026-06-18", "dateLabel": "18 มิ.ย. 69", "month": "2026-06", "time": null, "done": true, "cancelled": false, "subject": "สัมมนา สหกนณ์ สหภาพ", "org": "ศล.บภ ๒.", "docno": null, "docdate": null, "attendees": null, "notes": null}, {"date": "2026-06-19", "dateLabel": "19 มิ.ย. 69", "month": "2026-06", "time": "13.30 - 15.30", "done": true, "cancelled": false, "subject": "ประชุมทบทวนรายงานประจำปีของผู้ได้รับใบรับรอง CNS ตามผลการพิจารณาของ กพท.", "org": "สนง.ผญว.", "docno": "สนง.ผญว296/2569", "docdate": null, "attendees": "หัวหน้างาน", "notes": "MS Teams Meeting รหัสการประชุม: 489 612 655 746 88 รหัสผ่าน: hD9SZ9om"}, {"date": "2026-06-23", "dateLabel": "23 มิ.ย. 69", "month": "2026-06", "time": "10.00 - 12.00", "done": false, "cancelled": false, "subject": "ประชุมคู่มือดำเนินงานสนามบินสุโขทัย", "org": "สนามบินสุโขทัย", "docno": "16-09-267", "docdate": null, "attendees": null, "notes": null}, {"date": "2026-06-26", "dateLabel": "26 มิ.ย. 69", "month": "2026-06", "time": "14.00 - 16.00", "done": false, "cancelled": false, "subject": "ประกาศแต่งตั้ง SR  ศล.บภ ๒. 11 ต.ค. 65.pdf", "org": "สนามบินสุโขทัย", "docno": "16-09-266", "docdate": null, "attendees": null, "notes": null}, {"date": "2026-07-06", "dateLabel": "6-8 ก.ค. 2569", "month": "2026-07", "time": null, "done": false, "cancelled": false, "subject": "ผสว. ตรวจงานติดตั้งหอแม่สอด", "org": null, "docno": null, "docdate": null, "attendees": null, "notes": null}, {"date": "2026-07-20", "dateLabel": "20-24 ก.ค. 69", "month": "2026-07", "time": null, "done": false, "cancelled": true, "subject": "อบรมหลัหสูตร ATM Occurrence Investigation and Analysis โดยสถาบัน EUROCONTROL", "org": "คป.มป.", "docno": "คป.มป78/2569", "docdate": "29 เม.ย. 69", "attendees": "การัณย์ เรืองศรีชัย", "notes": "โรงแรม Grande Centre Point สุรวงศ์"}, {"date": null, "dateLabel": "15-19 มิ.ย. 69", "month": "2026-06", "time": null, "done": true, "cancelled": false, "subject": "รับการตรวจ IQA จาก ศบ.บภ ๒.", "org": null, "docno": null, "docdate": null, "attendees": null, "notes": null}, {"date": null, "dateLabel": "19 มิ.ย. 69", "month": "2026-06", "time": "10.00 - 12.00", "done": true, "cancelled": false, "subject": "ประชุม BAS", "org": null, "docno": null, "docdate": null, "attendees": null, "notes": null}];
+const SEED_MEETINGS = [{"date": "2026-05-05", "dateLabel": "5 พ.ค. 69", "month": "2026-05", "time": "09.30 - 12.00", "done": true, "cancelled": false, "subject": "ประชุมจัดทำ Safety Assessment การหยุดให้บริการ DVOR ลำปาง เพชรบูรณ์", "org": "อว.สว. / วช.บว.", "docno": "อว.สว266/2569", "docdate": "5 พ.ค. 69", "attendees": "การัณย์, ทศพล, ภาณุ ปิยะพงษ์, สุจินดา", "notes": "Microsoft Teams โดยมี Meeting ID: 485 590 230 117 64 11และ Passcode: on6Ri7Wb"}, {"date": "2026-05-06", "dateLabel": "6 พ.ค. 69", "month": "2026-05", "time": "09.00 - 16.00", "done": true, "cancelled": false, "subject": "อบรมเชิงปฏิบัติการ (Workshop) คณะทํางานจัดการระบบ คุณภาพด้านการบริการจราจรทางอากาศ (QMR – ATS)", "org": "พค.นบ.", "docno": "Helpme/960/2569", "docdate": "5 พ.ค. 69", "attendees": "พอพันธ์/คุณกฤษฎา/คุณสาวิตรี", "notes": "Microsoft Teams โดยมี Meeting ID: 485 590 230 117 64 11และ Passcode: on6Ri7Wb"}, {"date": "2026-05-07", "dateLabel": "7 พ.ค. 69", "month": "2026-05", "time": "08.30 - 16.30", "done": true, "cancelled": false, "subject": "อบรมการปฏิบัติงานบนที่สูง สำหรับผู้ปฏิบัติงาน", "org": "วช.บว.", "docno": "วช.บว228/2569", "docdate": "5 มี.ค. 69", "attendees": "วิศวกร ศล.บภ ๒. จำนวน 22 คน", "notes": "ห้องประชุม 2/1"}, {"date": "2026-05-08", "dateLabel": "8 พ.ค. 69", "month": "2026-05", "time": "09.00 - 16.00", "done": true, "cancelled": false, "subject": "อบรมเชิงปฏิบัติการ (Workshop) คณะทํางานจัดการระบบ คุณภาพด้านการบริการจราจรทางอากาศ (QMR – ภูมภาค)", "org": "พค.นบ.", "docno": "พค.นบ137/2569", "docdate": "30 เม.ย. 69", "attendees": "พอพันธ์/คุณกฤษฎา/คุณสาวิตรี", "notes": "https://teams.microsoft.com/meet/47057883543195?p=mjfaPBYZgrv4GXQxkU"}, {"date": "2026-05-11", "dateLabel": "11-12 พ.ค. 69", "month": "2026-05", "time": null, "done": true, "cancelled": false, "subject": "เรียนหลักสูตร  System Training course  Digital Voice Recorder (voxtronix) ในระบบ LMS", "org": "สว.บว.", "docno": "ศล.บภ2-1130/2569", "docdate": "23 พ.ค. 69", "attendees": "พอพันธ์ / ศล.บภ ๒. (วส.บว.)", "notes": "LMS"}, {"date": "2026-05-11", "dateLabel": "11 พ.ค. 69", "month": "2026-05", "time": "09.00 - 12.00", "done": true, "cancelled": false, "subject": "ประชุมการแจ้งเปลี่ยนแปลง โครงการวิทยุ ศล.บภ ๒.", "org": "วส.บว.", "docno": "Line", "docdate": "10 พ.ค. 69", "attendees": "พอพันธ์ / ศล.บภ ๒. (วส.บว.)", "notes": "https://teams.microsoft.com/meet/48902673366826?p=HUmzbCTOIAnBm96tZC"}, {"date": "2026-05-11", "dateLabel": "11 พ.ค. 69", "month": "2026-05", "time": "13.00 - 16.00", "done": true, "cancelled": false, "subject": "ประชุมจัดทำ Safety Assessment ของระบบงาน SMC รอบที่ 1", "org": "สนง.ผญว.", "docno": "สนง.ผญว226/2569", "docdate": "5 พ.ค. 69", "attendees": "การัณย์, ทศพล, ภาณุ ปิยะพงษ์, สุจินดา", "notes": "ZOOM Meeting ID: 474 437 3095 Passcode 998877"}, {"date": "2026-05-12", "dateLabel": "12 พ.ค. 69", "month": "2026-05", "time": "09.00 - 12.00", "done": true, "cancelled": false, "subject": "ประชุมเตรียมความพร้อม ฝึกซ้อม BCP 2569 (4/2569)", "org": "ศล.บภ ๒.", "docno": "ศล.บภ 2-1260/2569", "docdate": "7 พ.ค. 69", "attendees": "คณะทำงานและผู้เกี่ยวข้อง", "notes": "Microsoft Teams  ID : 418 329043 651 02 Passcode : Ad74XQ3D"}, {"date": "2026-05-12", "dateLabel": "12 พ.ค. 69", "month": "2026-05", "time": "13.30 - 16.30", "done": true, "cancelled": false, "subject": "ประชุมเรื่องถอด STS SSR", "org": "วต.บว. / วฟ.สว.", "docno": "Line", "docdate": "12 พ.ค. 69", "attendees": "พอพันธ์ / ภาณุ / วต.", "notes": "Microsoft Teams  ID : 473 943175 138 78 Passcode : V38Sj6P3"}, {"date": "2026-05-12", "dateLabel": "12 พ.ค. 69", "month": "2026-05", "time": "14.00 - 16.00", "done": true, "cancelled": false, "subject": "ประชุมหารือการติดตั้ง Solar Cell ณ ศล.บภ2. (โครงการของ วฟ.สว.)", "org": "วฟ.สว.", "docno": "Line", "docdate": "12 พ.ค. 69", "attendees": "คมสัน / พอพันธ์ / ภาณุ", "notes": "https://teams.microsoft.com/meet/44142351765059?p=0U82zWGlMvhoHT8k4Y"}, {"date": "2026-05-13", "dateLabel": "13 พ.ค. 69", "month": "2026-05", "time": "13.30 - 16.00", "done": true, "cancelled": false, "subject": "ประชุมพิจารณาแผนฝึกซ้อมเหตุฉุกเฉินอากาศยานเต็มรูปแบบประจำปี2569 ครั้งที่ 1", "org": "สนามบินสุโขทัย", "docno": "Helpme/1027/2569", "docdate": "11 พ.ค. 69", "attendees": null, "notes": "https://teams.microsoft.com/meet/41975574737213?p=aQqIQHQHlh3MxHQa68 | รหัสการประชุม: 419 755 747 372 13 | รหัสผ่าน : mj24fF9w"}, {"date": "2026-05-14", "dateLabel": "14 พ.ค. 69", "month": "2026-05", "time": "13.30 - 15.30", "done": true, "cancelled": false, "subject": "ประชุม เรื่องคุณสมบัติของระบบ Solar Rooftop", "org": "วฟ.สว.", "docno": "วฟ.สว616/2569", "docdate": "8 พ.ค. 69", "attendees": "พอพันธ์ / ภาณุ", "notes": "Teams Meeting ID: 418 574 932 149 70 Passcode: E69VA7Mn"}, {"date": "2026-05-14", "dateLabel": "14 พ.ค. 69", "month": "2026-05", "time": "13.30 - 16.00", "done": true, "cancelled": false, "subject": "ประชุมติดตามการแก้ไข NCF", "org": "สนง.ผญว.", "docno": "Line", "docdate": "11 พ.ค. 69", "attendees": "คณะ NC POC", "notes": "https://teams.microsoft.com/meet/49721062994549?p=UTVbrlUBmPlfg8OHA0"}, {"date": "2026-05-18", "dateLabel": "18 พ.ค. 69", "month": "2026-05", "time": "09.30 - 11.00", "done": true, "cancelled": false, "subject": "ประชุม Unit Standard Safety Response ศล.บภ 2. ครั้งที่ 10/2560", "org": "ศล.บภ ๒.", "docno": "Line Unit SR", "docdate": "16 พ.ค. 69", "attendees": "คณะทำงาน Unit SR", "notes": "https://us06web.zoom.us/j/9443609356?pwd=RGJTQU14QWxyUHJPWTUxcHdZYW5Pdz09&omn=84236828113"}, {"date": "2026-05-18", "dateLabel": "18 พ.ค. 69", "month": "2026-05", "time": "13.00 - 16.00", "done": true, "cancelled": false, "subject": "ประชุมจัดทำ Safety Assessment ของระบบงาน SMC รอบที่ 2", "org": "สนง.ผญว.", "docno": "สนง.ผญว226/2569", "docdate": "5 พ.ค. 69", "attendees": "การัณย์, ทศพล, ภาณุ ปิยะพงษ์, สุจินดา", "notes": "ZOOM Meeting ID: 474 437 3095 Passcode 998877"}, {"date": "2026-05-19", "dateLabel": "19 พ.ค. 69", "month": "2026-05", "time": "09.00 - 12.00", "done": true, "cancelled": false, "subject": "ประชุม Safety Assessment สนามบินแม่สอด โครงการเปลี่ยนแปลงวิทยุ", "org": "วส.บว.", "docno": "Line", "docdate": "16 พ.ค. 69", "attendees": "พอพันธ์ / วส. / ศว. / วฟ. / ATS", "notes": "https://teams.microsoft.com/meet/48891915741228?p=SX5MMOpzLUIunqPdaX"}, {"date": "2026-05-19", "dateLabel": "19 พ.ค. 69", "month": "2026-05", "time": "13.00 - 16.00", "done": true, "cancelled": false, "subject": "ประชุมยกเลิก NDB พร. พช.", "org": "วช.บว.", "docno": "วช.บว431/2569", "docdate": "15 พ.ค. 69", "attendees": "พอพันธ์ / ศล.บภ ๒. (วช.บว.) / วิศวกรหอ แพร่ เพชรบูรณ์", "notes": "Microsoftteams Meeting ID : 482 870 858 049 17 และ Passcode : i59pp6eV"}, {"date": "2026-05-20", "dateLabel": "20 พ.ค. 69", "month": "2026-05", "time": "09.00 - 16.00", "done": true, "cancelled": false, "subject": "อบรมการใช้งานระบบสารบรรณดิจิทัล", "org": "ลส.บท.", "docno": "ลส.บท122/0569", "docdate": "12 พ.ค. 69", "attendees": null, "notes": "Meeting ID: 568 660 9012     Passcode: 012120"}, {"date": "2026-05-20", "dateLabel": "20 พ.ค. 69", "month": "2026-05", "time": "10.00 - 12.00", "done": true, "cancelled": false, "subject": "ซ้อมแผนรักษาความปลอดภัยหอควบคุมการจราจรทางอากาศน่าน", "org": "ศล.บภ ๒.", "docno": null, "docdate": null, "attendees": null, "notes": "https://us06web.zoom.us/launch/jc/89724293479"}, {"date": "2026-05-20", "dateLabel": "20 พ.ค. 69", "month": "2026-05", "time": "13.00 - 15.00", "done": true, "cancelled": false, "subject": "กิจกรรมสร้างความตระหนักด้านสิ่งแวดล้อม", "org": "พส.บท.", "docno": null, "docdate": null, "attendees": null, "notes": "ศล.บภ ๒."}, {"date": "2026-05-21", "dateLabel": "21 พ.ค. 69", "month": "2026-05", "time": "07.45 - 16.30", "done": true, "cancelled": false, "subject": "เพื่อสนิท", "org": "พส.บท.", "docno": null, "docdate": null, "attendees": null, "notes": "ห้อง 2/1"}, {"date": "2026-05-26", "dateLabel": "26 พ.ค. 69", "month": "2026-05", "time": "09.00 - 12.00", "done": true, "cancelled": false, "subject": "ประชุมทบทวนการดำเนินงานการปฏิบัติงานป้องกัน วส.บว.", "org": "วส.บว.", "docno": "วส.บว263/2569", "docdate": "19 พ.ค. 69", "attendees": "ผศล. / พอพันธ์ / วส.บว.", "notes": "Microsoft Teams - Meeting ID: 482 067 021 82462 Passcode: Ey7iQ63q"}, {"date": "2026-05-27", "dateLabel": "27 พ.ค. 69", "month": "2026-05", "time": "13.30 - 15.30", "done": true, "cancelled": false, "subject": "ประชุม คปอ.", "org": "ศล.บภ ๒.", "docno": null, "docdate": null, "attendees": "คณะกรรมการ คปอ.", "notes": null}, {"date": "2026-05-28", "dateLabel": "28 พ.ค. 69", "month": "2026-05", "time": "09.00 - 12.00", "done": true, "cancelled": false, "subject": "ประชุม MM", "org": null, "docno": null, "docdate": null, "attendees": "ผศล.", "notes": null}, {"date": "2026-05-28", "dateLabel": "28 พ.ค. 69", "month": "2026-05", "time": "13.00 - 15.00", "done": true, "cancelled": false, "subject": "ประชุมนิรภัยการบิน", "org": "ศล.บภ ๒.", "docno": null, "docdate": null, "attendees": "ศล. ทอ. หน่วยงานข้างเคียง", "notes": "ห้อง 2/1"}, {"date": "2026-05-29", "dateLabel": "29 พ.ค. 69", "month": "2026-05", "time": "09.00 - 12.00", "done": true, "cancelled": false, "subject": "ประชุมเตรียมความพร้อม ฝึกซ้อม BCP 2569 (5/2569)", "org": "ศล.บภ ๒.", "docno": null, "docdate": null, "attendees": "คณะทำงานและผู้เกี่ยวข้อง", "notes": null}, {"date": "2026-05-29", "dateLabel": "29 พ.ค. 69", "month": "2026-05", "time": "10.45 - 12.00", "done": true, "cancelled": false, "subject": "คณะกรรมการ IT (พิจารณางบประมาณ)", "org": null, "docno": null, "docdate": null, "attendees": null, "notes": null}, {"date": "2026-06-04", "dateLabel": "4 มิ.ย. 69", "month": "2026-06", "time": "13.30 - 16.30", "done": true, "cancelled": false, "subject": "ประชุม Preventive Action 3/2569", "org": null, "docno": null, "docdate": null, "attendees": "งานวิศวกรรม ศล.บภ ๒.", "notes": null}, {"date": "2026-06-05", "dateLabel": "5 มิ.ย. 69", "month": "2026-06", "time": "09.00 - 11.00", "done": true, "cancelled": false, "subject": "การประชุม Unit Standard Safety Response ศล.บภ 2. ครั้งที่ 11/2560", "org": "ศล.บภ ๒.", "docno": "Line Unit SR", "docdate": "31 พ.ค. 69", "attendees": "คณะทำงาน Unit SR", "notes": null}, {"date": "2026-06-08", "dateLabel": "8 มิ.ย. 69", "month": "2026-06", "time": "09.00 - 12.00", "done": true, "cancelled": false, "subject": "morning coffee", "org": "ศล.บภ ๒.", "docno": null, "docdate": null, "attendees": "หัวหน้างาน", "notes": null}, {"date": "2026-06-09", "dateLabel": "9 มิ.ย. 69", "month": "2026-06", "time": null, "done": true, "cancelled": false, "subject": "ฝึกซ้อมเสมือนจริง BCP 2569 (6/2569)", "org": "ศล.บภ ๒.", "docno": null, "docdate": null, "attendees": "คณะทำงานและผู้เกี่ยวข้อง", "notes": null}, {"date": "2026-06-11", "dateLabel": "11 มิ.ย. 69", "month": "2026-06", "time": null, "done": true, "cancelled": false, "subject": "ฝึกซ้อมจริง BCP 2569 (7/2569)", "org": "ศล.บภ ๒.", "docno": null, "docdate": null, "attendees": "คณะทำงานและผู้เกี่ยวข้อง", "notes": null}, {"date": "2026-06-11", "dateLabel": "11 มิ.ย. 69", "month": "2026-06", "time": "13.00 - 14.30", "done": true, "cancelled": false, "subject": "วิทยากรสอนวิศวกรใหม่", "org": "ศล.บภ ๒.", "docno": null, "docdate": null, "attendees": "วิศวกรใหม่", "notes": "ห้อง 2/2"}, {"date": "2026-06-12", "dateLabel": "12 มิ.ย. 69", "month": "2026-06", "time": "13.00 - 16.00", "done": true, "cancelled": false, "subject": "ประชุมจัดทำ Safety Assessment ย้ายหอแม่สอด", "org": "ศล.บภ ๒.", "docno": null, "docdate": null, "attendees": null, "notes": null}, {"date": "2026-06-17", "dateLabel": "17 มิ.ย. 69", "month": "2026-06", "time": "13.00 - 16.00", "done": false, "cancelled": true, "subject": "ประชุม BAS", "org": null, "docno": null, "docdate": null, "attendees": null, "notes": null}, {"date": "2026-06-18", "dateLabel": "18 มิ.ย. 69", "month": "2026-06", "time": null, "done": true, "cancelled": false, "subject": "สัมมนา สหกนณ์ สหภาพ", "org": "ศล.บภ ๒.", "docno": null, "docdate": null, "attendees": null, "notes": null}, {"date": "2026-06-19", "dateLabel": "19 มิ.ย. 69", "month": "2026-06", "time": "13.30 - 15.30", "done": true, "cancelled": false, "subject": "ประชุมทบทวนรายงานประจำปีของผู้ได้รับใบรับรอง CNS ตามผลการพิจารณาของ กพท.", "org": "สนง.ผญว.", "docno": "สนง.ผญว296/2569", "docdate": null, "attendees": "หัวหน้างาน", "notes": "MS Teams Meeting รหัสการประชุม: 489 612 655 746 88 รหัสผ่าน: hD9SZ9om"}, {"date": "2026-06-23", "dateLabel": "23 มิ.ย. 69", "month": "2026-06", "time": "10.00 - 12.00", "done": false, "cancelled": false, "subject": "ประชุมคู่มือดำเนินงานสนามบินสุโขทัย", "org": "สนามบินสุโขทัย", "docno": "16-09-267", "docdate": null, "attendees": null, "notes": null}, {"date": "2026-06-26", "dateLabel": "26 มิ.ย. 69", "month": "2026-06", "time": "14.00 - 16.00", "done": false, "cancelled": false, "subject": "ประกาศแต่งตั้ง SR  ศล.บภ ๒. 11 ต.ค. 65.pdf", "org": "สนามบินสุโขทัย", "docno": "16-09-266", "docdate": null, "attendees": null, "notes": null}, {"date": "2026-07-06", "dateLabel": "6-8 ก.ค. 2569", "month": "2026-07", "time": null, "done": false, "cancelled": false, "subject": "ผสว. ตรวจงานติดตั้งหอแม่สอด", "org": null, "docno": null, "docdate": null, "attendees": null, "notes": null}, {"date": "2026-07-20", "dateLabel": "20-24 ก.ค. 69", "month": "2026-07", "time": null, "done": false, "cancelled": true, "subject": "อบรมหลัหสูตร ATM Occurrence Investigation and Analysis โดยสถาบัน EUROCONTROL", "org": "คป.มป.", "docno": "คป.มป78/2569", "docdate": "29 เม.ย. 69", "attendees": "การัณย์ เรืองศรีชัย", "notes": "โรงแรม Grande Centre Point สุรวงศ์"}, {"date": null, "dateLabel": "15-19 มิ.ย. 69", "month": "2026-06", "time": null, "done": true, "cancelled": false, "subject": "รับการตรวจ IQA จาก ศบ.บภ ๒.", "org": null, "docno": null, "docdate": null, "attendees": null, "notes": null}, {"date": null, "dateLabel": "19 มิ.ย. 69", "month": "2026-06", "time": "10.00 - 12.00", "done": true, "cancelled": false, "subject": "ประชุม BAS", "org": null, "docno": null, "docdate": null, "attendees": null, "notes": null}];
+let MEETINGS = [];
 
 const MONTHS_TH=["","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม"];
-const ORG_PALETTE=["#4a80b5","#3a7d5a","#c5960a","#c9553a","#8a6daa","#2a9a94","#b54a55","#8a8a3a","#5a5ab5","#8a5a3a","#c97aa0","#5a7a8a","#6fae3a","#8a8580"];
+
+/* ── Org colour palette ── 14 distinct, accessible colours */
+const ORG_PALETTE = [
+  {bg:"#dbeafe",fg:"#1d4ed8",dot:"#3b82f6"},  /* blue */
+  {bg:"#d1fae5",fg:"#065f46",dot:"#10b981"},  /* emerald */
+  {bg:"#fef3c7",fg:"#92400e",dot:"#f59e0b"},  /* amber */
+  {bg:"#fce7f3",fg:"#9d174d",dot:"#ec4899"},  /* pink */
+  {bg:"#ede9fe",fg:"#5b21b6",dot:"#8b5cf6"},  /* violet */
+  {bg:"#ffedd5",fg:"#9a3412",dot:"#f97316"},  /* orange */
+  {bg:"#cffafe",fg:"#155e75",dot:"#06b6d4"},  /* cyan */
+  {bg:"#dcfce7",fg:"#166534",dot:"#22c55e"},  /* green */
+  {bg:"#fef9c3",fg:"#713f12",dot:"#eab308"},  /* yellow */
+  {bg:"#fde2e2",fg:"#991b1b",dot:"#ef4444"},  /* red */
+  {bg:"#e0e7ff",fg:"#3730a3",dot:"#6366f1"},  /* indigo */
+  {bg:"#f0fdf4",fg:"#14532d",dot:"#16a34a"},  /* lime-green */
+  {bg:"#fdf4ff",fg:"#701a75",dot:"#d946ef"},  /* fuchsia */
+  {bg:"#f1f5f9",fg:"#334155",dot:"#64748b"},  /* slate */
+];
 
 function monthsAvailable(){
   return [...new Set(MEETINGS.map(m=>m.month).filter(Boolean))].sort();
@@ -188,19 +235,24 @@ function monthLabel(key){
   const [y,m]=key.split("-").map(Number);
   return MONTHS_TH[m]+" "+(y+543);
 }
-const MKEYS = monthsAvailable();
-let viewMonth = MKEYS.includes("2026-06") ? "2026-06" : MKEYS[MKEYS.length-1];
+
+let MKEYS = monthsAvailable();
+let viewMonth = null;
 
 function orgLabel(m){ return m.org || "ไม่ระบุหน่วยงาน"; }
-function orgColorMap(){
+
+function buildOrgColorMap(){
   const counts={};
   MEETINGS.forEach(m=>{const o=orgLabel(m);counts[o]=(counts[o]||0)+1;});
   const sorted=Object.keys(counts).sort((a,b)=>counts[b]-counts[a]);
   const map={};
-  sorted.forEach((o,i)=>map[o]=ORG_PALETTE[i%ORG_PALETTE.length]);
-  return {map,counts};
+  sorted.forEach((o,i)=>{ map[o]={...ORG_PALETTE[i%ORG_PALETTE.length], name:o}; });
+  return map;
 }
-const {map:ORG_COLOR, counts:ORG_COUNT} = orgColorMap();
+let ORG_COLOR = buildOrgColorMap();
+
+firebase.initializeApp({apiKey:"AIzaSyDAvZAH8ksrWVl2fx7qdQYqyOVkd9ztNhI",authDomain:"ptwc-faca6.firebaseapp.com",projectId:"ptwc-faca6",storageBucket:"ptwc-faca6.firebasestorage.app",messagingSenderId:"645074248828",appId:"1:645074248828:web:63737f7f9ddfe9cea155f9"});
+const db = firebase.firestore();
 
 function statusOf(m){
   if(m.cancelled) return "cancel";
@@ -227,20 +279,29 @@ function groupByDay(list){
   return order.map(k=>({key:k,label:groups[k][0].dateLabel||k,items:groups[k]}));
 }
 
+function escHtml(s){
+  if(!s) return "";
+  return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
 function linkify(text){
   if(!text) return "";
-  const esc=text.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-  return esc.replace(/(https?:\/\/[^\s|]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
+  return escHtml(text).replace(/(https?:\/\/[^\s|&]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
 }
 
 function meetingIndex(m){ return MEETINGS.indexOf(m); }
 
+function orgChipHTML(m){
+  const o=orgLabel(m);
+  const c=ORG_COLOR[o]||ORG_PALETTE[13];
+  return `<span class="org-chip" style="background:${c.bg};color:${c.fg}"><span class="chip-dot" style="background:${c.dot}"></span>${escHtml(o)}</span>`;
+}
+
 function finItemHTML(m){
   const s=statusOf(m);
   return `<div class="fin-item" style="border-left-color:${statusColorVar(s)}" onclick="openMeeting(${meetingIndex(m)})">
-    <span class="dot" style="background:${statusColorVar(s)}"></span>
-    <span class="nm">${m.subject}<span class="org-tag">${orgLabel(m)}</span></span>
-    <span class="dt">${m.time?m.time:""}</span>
+    <span class="status-dot" style="background:${statusColorVar(s)}"></span>
+    <span class="nm">${escHtml(m.subject)}<span class="org-row">${orgChipHTML(m)}</span></span>
+    <span class="dt">${m.time?escHtml(m.time):""}</span>
     <span class="badge ${s}">${statusLabel(s)}</span>
   </div>`;
 }
@@ -251,7 +312,7 @@ function dayGroupHTML(list){
   return `<div class="fin-list">` + groups.map(g=>`
     <div class="day-group">
       <div class="day-group-header">
-        <span class="day-group-date">${g.label}</span>
+        <span class="day-group-date">${escHtml(g.label)}</span>
         <span class="day-group-sum">${g.items.length} รายการ</span>
       </div>
       <div class="fin-list">${g.items.map(finItemHTML).join("")}</div>
@@ -259,6 +320,7 @@ function dayGroupHTML(list){
 }
 
 window.changeMonth=function(dir){
+  MKEYS=monthsAvailable();
   let i=MKEYS.indexOf(viewMonth);
   if(i===-1) i=MKEYS.length-1;
   const ni=i+dir;
@@ -276,14 +338,18 @@ window.switchTab=function(name){
 window.openMeeting=function(idx){
   const m=MEETINGS[idx];
   const s=statusOf(m);
+  const o=orgLabel(m);
+  const c=ORG_COLOR[o]||ORG_PALETTE[13];
   const body=document.getElementById("meet-modal-body");
   body.innerHTML=`
-    <h3>${m.subject}</h3>
-    <div class="m-badge-row"><span class="badge ${s}">${statusLabel(s)}</span></div>
-    <div class="modal-field"><div class="mf-label">วันที่ &amp; เวลา</div><div class="mf-value">${m.dateLabel||"-"}${m.time?" &middot; "+m.time:""}</div></div>
-    <div class="modal-field"><div class="mf-label">หน่วยงานผู้จัด</div><div class="mf-value">${orgLabel(m)}</div></div>
-    ${m.docno?`<div class="modal-field"><div class="mf-label">เลขที่หนังสือ</div><div class="mf-value">${m.docno}${m.docdate?" &middot; ลงวันที่ "+m.docdate:""}</div></div>`:""}
-    ${m.attendees?`<div class="modal-field"><div class="mf-label">ผู้ร่วมกิจกรรม</div><div class="mf-value">${m.attendees}</div></div>`:""}
+    <h3>${escHtml(m.subject)}</h3>
+    <div class="m-badge-row">
+      <span class="badge ${s}">${statusLabel(s)}</span>
+      <span class="org-chip" style="background:${c.bg};color:${c.fg}"><span class="chip-dot" style="background:${c.dot}"></span>${escHtml(o)}</span>
+    </div>
+    <div class="modal-field"><div class="mf-label">วันที่ &amp; เวลา</div><div class="mf-value">${escHtml(m.dateLabel)||"-"}${m.time?" &middot; "+escHtml(m.time):""}</div></div>
+    ${m.docno?`<div class="modal-field"><div class="mf-label">เลขที่หนังสือ</div><div class="mf-value">${escHtml(m.docno)}${m.docdate?" &middot; ลงวันที่ "+escHtml(m.docdate):""}</div></div>`:""}
+    ${m.attendees?`<div class="modal-field"><div class="mf-label">ผู้ร่วมกิจกรรม</div><div class="mf-value">${escHtml(m.attendees)}</div></div>`:""}
     ${m.notes?`<div class="modal-field"><div class="mf-label">หมายเหตุ</div><div class="mf-value">${linkify(m.notes)}</div></div>`:""}
     <div class="modal-actions"><button class="btn btn-ghost" onclick="closeModal()">ปิด</button></div>
   `;
@@ -292,6 +358,7 @@ window.openMeeting=function(idx){
 window.closeModal=function(){document.getElementById("meet-modal").classList.add("hidden");};
 document.getElementById("meet-modal").addEventListener("click",function(e){if(e.target===this)closeModal();});
 
+/* ── OVERVIEW ── */
 function renderOverview(){
   const list=byMonth(viewMonth);
   const done=list.filter(m=>statusOf(m)==="done").length;
@@ -313,7 +380,6 @@ function renderOverview(){
       <div class="sum-card upcoming"><div class="label">กำลังจะถึง</div><div class="value num">${upcoming}</div></div>
       <div class="sum-card cancel"><div class="label">ยกเลิก</div><div class="value num">${cancel}</div></div>
     </div>
-
     <div class="chart-card">
       <div class="section-label">สัดส่วนสถานะ</div>
       <div class="balance-track">
@@ -327,17 +393,18 @@ function renderOverview(){
         <span><i style="background:var(--accent)"></i>ยกเลิก ${cancel}</span>
       </div>
     </div>
-
     <div class="chart-card">
       <div class="section-label">แยกตามหน่วยงาน</div>
-      ${deptRows.length? deptRows.map(d=>`
-        <div class="cat-bar-row" onclick="goToDept('${d.replace(/'/g,"\\'")}')">
-          <span class="cat-bar-label">${d}</span>
-          <span class="cat-bar-track"><span class="cat-bar-fill" style="width:${(counts[d]/total*100)}%;background:${ORG_COLOR[d]}"></span></span>
+      ${deptRows.length? deptRows.map(d=>{
+        const c=ORG_COLOR[d]||ORG_PALETTE[13];
+        return `<div class="cat-bar-row" onclick="goToDept(${JSON.stringify(d)})">
+          <span class="cat-bar-swatch" style="background:${c.dot}"></span>
+          <span class="cat-bar-label">${escHtml(d)}</span>
+          <span class="cat-bar-track"><span class="cat-bar-fill" style="width:${(counts[d]/total*100)}%;background:${c.dot}"></span></span>
           <span class="cat-bar-amt">${counts[d]} รายการ</span>
-        </div>`).join("") : `<div class="empty"><span>&#128203;</span>ไม่มีข้อมูลเดือนนี้</div>`}
+        </div>`;
+      }).join("") : `<div class="empty"><span>&#128203;</span>ไม่มีข้อมูลเดือนนี้</div>`}
     </div>
-
     <hr class="divider"/>
     <div class="section-label">รายการประชุมเดือนนี้</div>
     ${dayGroupHTML(list)}
@@ -348,11 +415,56 @@ window.goToDept=function(org){
   listSearch=org; listStatus="all";
   switchTab("list");
   renderList();
-  document.getElementById("list-search").value=org;
+  const inp=document.getElementById("list-search");
+  if(inp){inp.value=org;}
 };
 
+/* ── LIST TAB ── */
+let _pendingSuccess=false;
 let listSearch="";
 let listStatus="all";
+
+function allOrgsUnique(){
+  return [...new Set(MEETINGS.map(m=>orgLabel(m)))].sort();
+}
+
+function addFormHTML(){
+  const orgs=allOrgsUnique();
+  return `
+  <div class="add-form-section">
+    <div class="section-label">เพิ่มรายการประชุม</div>
+    <hr/>
+    <div class="add-fields">
+      <div class="add-field wide"><label>เรื่อง</label><input type="text" id="add-subject" placeholder="หัวข้อการประชุม"/></div>
+      <div class="add-field"><label>วันที่</label><input type="date" id="add-date"/></div>
+      <div class="add-field"><label>เวลา</label><input type="text" id="add-time" placeholder="09.00 - 12.00"/></div>
+    </div>
+    <div class="add-fields">
+      <div class="add-field wide">
+        <label>หน่วยงาน</label>
+        <input type="text" id="add-org" list="add-org-list" placeholder="พิมพ์หรือเลือกหน่วยงาน"/>
+        <datalist id="add-org-list">${orgs.map(o=>`<option value="${escHtml(o)}">`).join("")}</datalist>
+      </div>
+      <div class="add-field"><label>สถานะ</label>
+        <select id="add-status">
+          <option value="upcoming">กำลังจะถึง</option>
+          <option value="done">เสร็จสิ้น</option>
+          <option value="cancel">ยกเลิก</option>
+        </select>
+      </div>
+      <div class="add-field"><label>ผู้ร่วมกิจกรรม</label><input type="text" id="add-attendees" placeholder="ชื่อ / ตำแหน่ง"/></div>
+    </div>
+    <div class="add-fields">
+      <div class="add-field wide"><label>หมายเหตุ / ลิงก์</label><input type="text" id="add-notes" placeholder="ลิงก์ประชุม, ห้องประชุม ฯลฯ"/></div>
+      <div class="add-field"><label>เลขที่หนังสือ</label><input type="text" id="add-docno"/></div>
+    </div>
+    <div class="add-actions">
+      <button class="btn btn-primary" onclick="saveNewMeeting()">+ เพิ่ม</button>
+      <button class="btn btn-ghost" onclick="clearAddForm()">ล้างข้อมูล</button>
+      <span class="add-success" id="add-success">&#10003; บันทึกแล้ว</span>
+    </div>
+  </div>`;
+}
 
 function renderList(){
   const el=document.getElementById("tab-list");
@@ -366,9 +478,10 @@ function renderList(){
     return true;
   });
   el.innerHTML=`
-    <div class="section-label">รายการประชุมทั้งหมด (${MEETINGS.length} รายการ)</div>
+    ${addFormHTML()}
+    <div class="section-label">รายการทั้งหมด (${MEETINGS.length} รายการ)</div>
     <div class="filter-row">
-      <input type="text" id="list-search" placeholder="ค้นหาเรื่อง / หน่วยงาน / ผู้ร่วมประชุม..." value="${listSearch}"/>
+      <input type="text" id="list-search" placeholder="ค้นหาเรื่อง / หน่วยงาน / ผู้ร่วมประชุม..." value="${escHtml(listSearch)}"/>
       <button class="pill ${listStatus==='all'?'active':''}" onclick="setListStatus('all')">ทั้งหมด</button>
       <button class="pill ${listStatus==='done'?'active':''}" onclick="setListStatus('done')">เสร็จสิ้น</button>
       <button class="pill ${listStatus==='upcoming'?'active':''}" onclick="setListStatus('upcoming')">กำลังจะถึง</button>
@@ -376,13 +489,57 @@ function renderList(){
     </div>
     ${dayGroupHTML(filtered)}
   `;
+  if(_pendingSuccess){_pendingSuccess=false;const ok=document.getElementById("add-success");if(ok){ok.classList.add("show");setTimeout(()=>ok.classList.remove("show"),2000);}}
   document.getElementById("list-search").addEventListener("input",function(){
     listSearch=this.value; renderList();
-    setTimeout(()=>{const i=document.getElementById("list-search");i.focus();i.selectionStart=i.selectionEnd=i.value.length;},0);
+    setTimeout(()=>{const i=document.getElementById("list-search");if(i){i.focus();i.selectionStart=i.selectionEnd=i.value.length;}},0);
   });
 }
 window.setListStatus=function(s){listStatus=s; renderList();};
 
+window.saveNewMeeting=function(){
+  const subject=(document.getElementById("add-subject").value||"").trim();
+  if(!subject){document.getElementById("add-subject").focus();return;}
+  const dateVal=document.getElementById("add-date").value;
+  const timeVal=(document.getElementById("add-time").value||"").trim();
+  const org=(document.getElementById("add-org").value||"").trim()||null;
+  const statusVal=document.getElementById("add-status").value;
+  const attendees=(document.getElementById("add-attendees").value||"").trim()||null;
+  const notes=(document.getElementById("add-notes").value||"").trim()||null;
+  const docno=(document.getElementById("add-docno").value||"").trim()||null;
+
+  let iso=null, dateLabel=null, month=null;
+  if(dateVal){
+    iso=dateVal;
+    const [y,mo,d]=dateVal.split("-").map(Number);
+    const ABBR=["","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."];
+    const be=y+543;
+    dateLabel=`${d} ${ABBR[mo]} ${String(be).slice(2)}`;
+    month=`${y}-${String(mo).padStart(2,"0")}`;
+  }
+
+  const newEntry={
+    date:iso, dateLabel, month,
+    time:timeVal||null,
+    done:statusVal==="done",
+    cancelled:statusVal==="cancel",
+    subject, org, docno, docdate:null, attendees, notes
+  };
+
+  if(month) viewMonth=month;
+  _pendingSuccess=true;
+  clearAddForm();
+  db.collection("meetings").add(newEntry).catch(e=>{_pendingSuccess=false;alert("บันทึกไม่สำเร็จ: "+e.message);});
+};
+
+window.clearAddForm=function(){
+  ["add-subject","add-date","add-time","add-org","add-attendees","add-notes","add-docno"].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.value="";
+  });
+  const sel=document.getElementById("add-status");if(sel)sel.value="upcoming";
+};
+
+/* ── DEPT TAB ── */
 function renderDept(){
   const counts={};
   MEETINGS.forEach(m=>{const o=orgLabel(m);counts[o]=(counts[o]||0)+1;});
@@ -392,24 +549,36 @@ function renderDept(){
   el.innerHTML=`
     <div class="section-label">จำนวนการประชุมแยกตามหน่วยงาน (ทั้งหมด ${total} รายการ)</div>
     <div class="chart-card">
-      ${rows.map(d=>`
-        <div class="cat-bar-row" onclick="goToDept('${d.replace(/'/g,"\\'")}')">
-          <span class="cat-bar-label">${d}</span>
-          <span class="cat-bar-track"><span class="cat-bar-fill" style="width:${(counts[d]/total*100)}%;background:${ORG_COLOR[d]}"></span></span>
+      ${rows.map(d=>{
+        const c=ORG_COLOR[d]||ORG_PALETTE[13];
+        return `<div class="cat-bar-row" onclick="goToDept(${JSON.stringify(d)})">
+          <span class="cat-bar-swatch" style="background:${c.dot}"></span>
+          <span class="cat-bar-label">${escHtml(d)}</span>
+          <span class="cat-bar-track"><span class="cat-bar-fill" style="width:${(counts[d]/total*100)}%;background:${c.dot}"></span></span>
           <span class="cat-bar-amt">${counts[d]} รายการ</span>
-        </div>`).join("")}
+        </div>`;
+      }).join("")}
     </div>
-    <div class="section-label">คลิกหน่วยงานเพื่อดูรายการที่เกี่ยวข้องทั้งหมด</div>
+    <hr class="divider"/>
+    <div class="section-label">สีประจำหน่วยงาน</div>
+    <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.25rem;">
+      ${rows.map(d=>{
+        const c=ORG_COLOR[d]||ORG_PALETTE[13];
+        return `<span class="org-chip" style="background:${c.bg};color:${c.fg};font-size:.76rem;padding:.3rem .7rem;border-radius:20px;cursor:pointer" onclick="goToDept(${JSON.stringify(d)})"><span class="chip-dot" style="background:${c.dot}"></span>${escHtml(d)}</span>`;
+      }).join("")}
+    </div>
   `;
 }
 
+/* ── TREND TAB ── */
 function renderTrend(){
-  const maxV=Math.max(...MKEYS.map(k=>byMonth(k).length),1);
+  const allMonths=monthsAvailable();
+  const maxV=Math.max(...allMonths.map(k=>byMonth(k).length),1);
   const el=document.getElementById("tab-trend");
   el.innerHTML=`
     <div class="section-label">จำนวนการประชุมต่อเดือน</div>
     <div class="annual-chart">
-      ${MKEYS.map(k=>{
+      ${allMonths.map(k=>{
         const list=byMonth(k);
         const done=list.filter(m=>statusOf(m)==="done").length;
         const rest=list.length-done;
@@ -430,7 +599,7 @@ function renderTrend(){
     <hr class="divider"/>
     <div class="section-label">สรุปแต่ละเดือน</div>
     <div class="fin-list">
-      ${MKEYS.map(k=>{
+      ${allMonths.map(k=>{
         const list=byMonth(k);
         const done=list.filter(m=>statusOf(m)==="done").length;
         const upcoming=list.filter(m=>statusOf(m)==="upcoming").length;
@@ -446,6 +615,7 @@ function renderTrend(){
 }
 
 function renderAll(){
+  MKEYS=monthsAvailable();
   document.getElementById("month-label").textContent=monthLabel(viewMonth);
   renderOverview();
   renderList();
@@ -453,19 +623,20 @@ function renderAll(){
   renderTrend();
 }
 
+/* ── clock ── */
 const updateDate=()=>{document.getElementById("live-date").textContent=new Date().toLocaleDateString("th-TH",{weekday:"long",year:"numeric",month:"long",day:"numeric"});};
 updateDate();setInterval(updateDate,60000);
 
+/* ── theme ── */
 let themeMode=localStorage.getItem("themeModeMeetings")||"auto";
 function isNightUTC7(){
-  const nowUTC=new Date();
-  const utc7=new Date(nowUTC.getTime()+(-7*60-nowUTC.getTimezoneOffset())*60000);
-  const h=utc7.getHours();
-  return h>=19||h<6;
+  const n=new Date();
+  const u7=new Date(n.getTime()+(-7*60-n.getTimezoneOffset())*60000);
+  return u7.getHours()>=19||u7.getHours()<6;
 }
 function effectiveTheme(){
-  if(themeMode==="light")return "light";
-  if(themeMode==="dark")return "dark";
+  if(themeMode==="light")return"light";
+  if(themeMode==="dark")return"dark";
   return isNightUTC7()?"dark":"light";
 }
 function applyTheme(){
@@ -473,8 +644,7 @@ function applyTheme(){
   document.documentElement.setAttribute("data-theme",t==="dark"?"dark":"light");
   const btn=document.getElementById("theme-toggle");
   if(btn){
-    const icon=themeMode==="auto"?"\u{1F317}":themeMode==="dark"?"\u{1F319}":"\u{2600}\u{FE0F}";
-    btn.textContent=icon;
+    btn.textContent=themeMode==="auto"?"\u{1F317}":themeMode==="dark"?"\u{1F319}":"\u2600\uFE0F";
     btn.title=themeMode==="auto"?`อัตโนมัติ (ตอนนี้: ${t==="dark"?"กลางคืน":"กลางวัน"})`:themeMode==="dark"?"โหมดกลางคืน":"โหมดกลางวัน";
   }
 }
@@ -486,7 +656,25 @@ window.cycleTheme=function(){
 applyTheme();
 setInterval(()=>{if(themeMode==="auto")applyTheme();},300000);
 
-renderAll();
+async function initApp(){
+  document.getElementById("tab-overview").innerHTML='<div class="empty"><span>&#8987;</span>กำลังโหลดข้อมูล...</div>';
+  const probe=await db.collection("meetings").limit(1).get();
+  if(probe.empty){
+    const batch=db.batch();
+    SEED_MEETINGS.forEach(m=>batch.set(db.collection("meetings").doc(),m));
+    await batch.commit();
+  }
+  db.collection("meetings").onSnapshot(snap=>{
+    MEETINGS=snap.docs.map(d=>({...d.data(),_id:d.id}));
+    MEETINGS.sort((a,b)=>(a.date||"9999").localeCompare(b.date||"9999")||(a.time||"").localeCompare(b.time||""));
+    if(!viewMonth){const av=monthsAvailable();viewMonth=av.includes("2026-06")?"2026-06":av[av.length-1]||"2026-06";}
+    ORG_COLOR=buildOrgColorMap();
+    MKEYS=monthsAvailable();
+    document.getElementById("info-count").textContent=MEETINGS.length;
+    renderAll();
+  });
+}
+initApp();
 
 </script>
 </body>
