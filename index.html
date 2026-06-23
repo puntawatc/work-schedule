@@ -481,6 +481,18 @@ function renderList(){
     }
     return true;
   });
+  /* When viewing all: show what's left to do first (upcoming, soonest first),
+     then completed (most recent first), then cancelled. */
+  if(listStatus==="all"){
+    const rank=m=>{const s=statusOf(m);return s==="upcoming"?0:s==="done"?1:2;};
+    filtered.sort((a,b)=>{
+      const ra=rank(a),rb=rank(b);
+      if(ra!==rb) return ra-rb;
+      const da=a.date||"9999",db_=b.date||"9999";
+      if(ra===1) return db_.localeCompare(da); /* done: newest first */
+      return da.localeCompare(db_);            /* upcoming/cancel: soonest first */
+    });
+  }
   el.innerHTML=`
     ${addFormHTML()}
     <div class="section-label">รายการทั้งหมด (${MEETINGS.length} รายการ)</div>
